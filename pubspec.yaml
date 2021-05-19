@@ -1,0 +1,111 @@
+name: testap
+description: A new Flutter project.
+publish_to: "none" 
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+
+
+  cupertino_icons: ^1.0.2
+  getwidget: ^1.2.4
+  smooth_star_rating: ^1.1.1
+  sizer: ^1.1.8
+  
+  eva_icons_flutter: ^2.0.1
+  date_time_picker: ^2.0.0
+  page_indicator: ^0.3.0
+  image_picker_widget: ^1.0.2
+  # persistent_bottom_nav_bar: ^4.0.2
+  # motion_tab_bar: ^0.1.5
+  ff_navigation_bar: ^0.1.5
+    
+  smooth_page_indicator: ^0.2.3
+  flutter_dropdown: ^0.0.8
+  modal_bottom_sheet: ^2.0.0
+  toggle_bar: ^1.0.0
+  expandable: ^5.0.1
+  retrofit: ^2.0.0
+  logger: ^1.0.0
+  
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  retrofit_generator: ^2.0.0
+  build_runner: ^2.0.3
+
+flutter:
+
+  uses-material-design: true
+
+  assets:
+    - assets/images/Cover.png
+    - assets/images/img2.png
+
+
+  fonts:
+    - family: Brandon_Black
+      fonts:
+        - asset: assets/fonts/Brandon_Black.otf
+
+    - family: Cocan
+      fonts:
+        - asset: assets/fonts/Cocan.ttf
+
+    - family: Roboto
+      fonts:
+        - asset: assets/fonts/Roboto.ttf
+
+    - family: amiri
+      fonts:
+        - asset: assets/fonts/amiri/Amiri-Bold.ttf
+        - asset: assets/fonts/amiri/Amiri-BoldItalic.ttf
+        - asset: assets/fonts/amiri/Amiri-Italic.ttf
+        - asset: assets/fonts/amiri/Amiri-Regular.ttf
+    
+    - family: bein
+      fonts:
+        - asset: assets/fonts/bein/bein.ttf
+    
+    - family: kofi
+      fonts:
+        - asset: assets/fonts/kofi/regular.ttf
+        - asset: assets/fonts/kofi/bold.ttf
+    
+    - family: juzor
+      fonts:
+        - asset: assets/fonts/juzor/juzor.ttf
+    
+    - family: cairo
+      fonts:
+        - asset: assets/fonts/cairo/Cairo-Black.ttf
+        - asset: assets/fonts/cairo/Cairo-Bold.ttf
+        - asset: assets/fonts/cairo/Cairo-ExtraLight.ttf
+        - asset: assets/fonts/cairo/Cairo-Light.ttf
+        - asset: assets/fonts/cairo/Cairo-Regular.ttf
+        - asset: assets/fonts/cairo/Cairo-SemiBold.ttf
+    - family: changa
+      fonts:
+        - asset: assets/fonts/changa/Changa-Bold.ttf
+        - asset: assets/fonts/changa/Changa-ExtraBold.ttf
+        - asset: assets/fonts/changa/Changa-ExtraLight.ttf
+        - asset: assets/fonts/changa/Changa-Light.ttf
+        - asset: assets/fonts/changa/Changa-Regular.ttf
+        - asset: assets/fonts/changa/Changa-Medium.ttf
+        - asset: assets/fonts/changa/Changa-SemiBold.ttf
+
+    - family: tajwal
+      fonts:
+        - asset: assets/fonts/tajawal/Tajawal-Black.ttf
+        - asset: assets/fonts/tajawal/Tajawal-Bold.ttf
+        - asset: assets/fonts/tajawal/Tajawal-ExtraBold.ttf
+        - asset: assets/fonts/tajawal/Tajawal-ExtraLight.ttf
+        - asset: assets/fonts/tajawal/Tajawal-Light.ttf
+        - asset: assets/fonts/tajawal/Tajawal-Regular.ttf
+        - asset: assets/fonts/tajawal/Tajawal-Medium.ttf
