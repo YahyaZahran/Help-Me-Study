@@ -7,6 +7,8 @@ import 'package:smooth_star_rating/smooth_star_rating.dart';
 import 'package:testap/color_pallete.dart';
 
 import 'package:sizer/sizer.dart';
+import 'package:testap/pages/course_page/course_page.dart';
+import 'package:testap/pages/my_reviews.dart';
 import 'package:toggle_bar/toggle_bar.dart';
 
 import '../../my_colors.dart';
@@ -36,7 +38,7 @@ class ProfilePage extends StatelessWidget {
               selectedTabColor: Theme.of(context).accentColor,
               borderRadius: 15,
               textColor: Colors.black,
-              labels: ["لمحة", "التفاصيل", "الشهادات", "الدورات", "التقييم"],
+              labels: ["لمحة", "التفاصيل", "المهارات", "الدورات", "التقييم"],
               onSelectionUpdated: (index) =>
                   c2.jumpToPage(index), // Do something with index
             ),
@@ -63,65 +65,65 @@ class ProfilePage extends StatelessWidget {
     );
   }
 
-  ListView buildReviews(double wd) {
-    return ListView(
-      primary: false,
-      children: [
-        Container(
-          width: wd,
-          child: ListView.builder(
-            shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
-            itemBuilder: (context, index) => Container(
-                padding: EdgeInsets.all(10),
-                margin: EdgeInsets.only(bottom: 20),
-                width: wd,
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    CircleAvatar(
-                      backgroundImage: AssetImage("assets/images/Cover.png"),
-                      radius: wd / 12,
-                    ),
-                    Expanded(
-                        child: Padding(
-                      padding: const EdgeInsets.only(left: 10),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Yahya Zahran",
-                            style: TextStyle(
-                              fontSize: wd / 18,
-                              fontFamily: "Cocan",
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          SmoothStarRating(
-                            starCount: 5,
-                            color: Colors.orange,
-                            borderColor: Colors.orange,
-                            rating: 5,
-                          ),
-                          Text(
-                            "asdaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaasdaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaasdaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaasdaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-                            style: TextStyle(
-                              fontSize: wd / 22,
-                              fontFamily: "Cocan",
-                              color: Colors.black54,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ))
-                  ],
-                )),
-            itemCount: 4,
-          ),
-        )
-      ],
+  Widget buildReviews(double wd) {
+    return Container(
+      width: wd,
+      child: ListView.builder(
+        shrinkWrap: true,
+        // physics: NeverScrollableScrollPhysics(),
+        itemBuilder: (context, index) =>
+            // Container(
+            //     padding: EdgeInsets.all(10),
+            //     margin: EdgeInsets.only(bottom: 20),
+            //     width: wd,
+            //     child: Row(
+            //       crossAxisAlignment: CrossAxisAlignment.start,
+            //       children: [
+            //         CircleAvatar(
+            //           backgroundImage: AssetImage("assets/images/Cover.png"),
+            //           radius: wd / 12,
+            //         ),
+            //         Expanded(
+            //             child: Padding(
+            //           padding: const EdgeInsets.only(left: 10),
+            //           child: Column(
+            //             crossAxisAlignment: CrossAxisAlignment.start,
+            //             mainAxisAlignment: MainAxisAlignment.start,
+            //             children: [
+            //               Text(
+            //                 "Yahya Zahran",
+            //                 style: TextStyle(
+            //                   fontSize: wd / 18,
+            //                   fontFamily: "Cocan",
+            //                   color: Colors.black,
+            //                   fontWeight: FontWeight.bold,
+            //                 ),
+            //               ),
+            //               SmoothStarRating(
+            //                 starCount: 5,
+            //                 color: Colors.orange,
+            //                 borderColor: Colors.orange,
+            //                 rating: 5,
+            //               ),
+            //               Text(
+            //                 "asdaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaasdaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaasdaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaasdaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            //                 style: TextStyle(
+            //                   fontSize: wd / 22,
+            //                   fontFamily: "Cocan",
+            //                   color: Colors.black54,
+            //                 ),
+            //               ),
+            //             ],
+            //           ),
+            //         ))
+            //       ],
+            //     )),
+            Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: ReviewWidget(),
+        ),
+        itemCount: 4,
+      ),
     );
   }
 
@@ -165,36 +167,21 @@ class ProfilePage extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 20),
       children: [
         Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              "ـ أخصائي في طب الأسنان وجراحتها",
-              style: TextStyle(
-                fontSize: 18.0.sp,
-                fontFamily: "Cocan",
-                color: Colors.black54,
-              ),
-              textAlign: TextAlign.end,
+            DetailsItem(
+              icon: Icons.remove,
+              title: "ماجستير في أكل الهوا",
             ),
-            SizedBox(height: 2.0.h),
-            Text(
-              "ـ ماجستير في اللغة الإنكليزية",
-              style: TextStyle(
-                fontSize: 18.0.sp,
-                fontFamily: "Cocan",
-                color: Colors.black54,
-              ),
-              textAlign: TextAlign.end,
+            Divider(),
+            DetailsItem(
+              icon: Icons.remove,
+              title: "ماجستير في أكل الهوا",
             ),
-            SizedBox(height: 2.0.h),
-            Text(
-              "ـ بايثون",
-              style: TextStyle(
-                fontSize: 18.0.sp,
-                fontFamily: "Cocan",
-                color: Colors.black54,
-              ),
-              textAlign: TextAlign.end,
+            Divider(),
+            DetailsItem(
+              icon: Icons.remove,
+              title: "ماجستير في أكل الهوا",
             ),
           ],
         )
@@ -204,87 +191,95 @@ class ProfilePage extends StatelessWidget {
 
   Widget horizontalCardBuilder(BuildContext context) {
     return Center(
-      child: Container(
-        width: 80.0.w,
-        height: 33.0.h,
-        decoration: BoxDecoration(
-          border:
-              Border.all(color: Theme.of(context).primaryColor, width: 0.25),
-          borderRadius: BorderRadius.all(
-            Radius.circular(19),
+      child: InkWell(
+        onTap: () => Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => Subjectpage(),
+            )),
+        child: Container(
+          width: 80.0.w,
+          height: 33.0.h,
+          decoration: BoxDecoration(
+            border:
+                Border.all(color: Theme.of(context).primaryColor, width: 0.25),
+            borderRadius: BorderRadius.all(
+              Radius.circular(19),
+            ),
+            color: ColorPalletes.bluegrey1.shade50,
+            image: DecorationImage(
+              fit: BoxFit.cover,
+              image: AssetImage("assets/images/Cover.png"),
+            ),
           ),
-          color: ColorPalletes.bluegrey1.shade50,
-          image: DecorationImage(
-            fit: BoxFit.cover,
-            image: AssetImage("assets/images/Cover.png"),
-          ),
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            Container(
-              // margin: EdgeInsets.all(6),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(19),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Container(
+                // margin: EdgeInsets.all(6),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(19),
+                  ),
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      Colors.transparent,
+                      Colors.black.withOpacity(0.7),
+                    ],
+                  ),
                 ),
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    Colors.transparent,
-                    Colors.black.withOpacity(0.7),
+
+                padding: EdgeInsets.all(5),
+                child: Row(
+                  children: [
+                    Container(
+                      width: 50.0.sp,
+                      height: 50.0.sp,
+                      decoration: BoxDecoration(
+                        border:
+                            Border.all(color: Theme.of(context).primaryColor),
+                        shape: BoxShape.circle,
+                        image: DecorationImage(
+                          fit: BoxFit.cover,
+                          image: AssetImage("assets/images/Cover.png"),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 5.0.sp,
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          width: 50.0.w,
+                          child: Text(
+                            "لغة انكليزية متقدمة",
+                            style: TextStyle(
+                                fontSize: 14.0.sp,
+                                fontFamily: 'cairo',
+                                color: Colors.white,
+                                fontWeight: FontWeight.w700),
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                        Text(
+                          "يحيى الزهراني",
+                          style: TextStyle(
+                            fontSize: 14.0.sp,
+                            fontFamily: 'cairo',
+                            color: Colors.white,
+                          ),
+                        )
+                      ],
+                    )
                   ],
                 ),
               ),
-
-              padding: EdgeInsets.all(5),
-              child: Row(
-                children: [
-                  Container(
-                    width: 50.0.sp,
-                    height: 50.0.sp,
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Theme.of(context).primaryColor),
-                      shape: BoxShape.circle,
-                      image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image: AssetImage("assets/images/Cover.png"),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 5.0.sp,
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                        width: 50.0.w,
-                        child: Text(
-                          "English3 English3 English3",
-                          style: TextStyle(
-                              fontSize: 16.0.sp,
-                              fontFamily: 'Cocan',
-                              color: Colors.white,
-                              fontWeight: FontWeight.w700),
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ),
-                      Text(
-                        "Yahya Zahran",
-                        style: TextStyle(
-                          fontSize: 16.0.sp,
-                          fontFamily: 'Cocan',
-                          color: Colors.white,
-                        ),
-                      )
-                    ],
-                  )
-                ],
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

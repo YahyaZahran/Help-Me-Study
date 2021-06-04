@@ -830,5 +830,6 @@ AppBar buildAppBar(double wd, BuildContext context) {
       ),
     ),
     iconTheme: IconThemeData(color: Theme.of(context).primaryColor),
+    centerTitle: true,
   );
 }

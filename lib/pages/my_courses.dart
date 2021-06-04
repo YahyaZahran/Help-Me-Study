@@ -26,7 +26,15 @@ class MyCourses extends StatelessWidget {
         ),
       ),
       body: ListView.builder(
-        itemBuilder: (_, __) => CourseWidget(),
+        itemBuilder: (_, __) => CourseWidget(
+          title: 'تعلم جدول الضرب بسرعة البرق',
+          description:
+              'طريقة رائعة جدا و سحرية في تعليم جدول الضرب و هي ما بترحم ابدا',
+          locatoin: 'حمص-عكرمة الجديدة -معهد الامل',
+          authorName: 'يحيى الزهران',
+          authorImageUrl: '',
+          coverUrl: '',
+        ),
         itemCount: 10,
       ),
     );

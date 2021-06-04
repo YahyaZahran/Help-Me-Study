@@ -19,30 +19,6 @@ class _P1State extends State<P1> {
     double he = MediaQuery.of(context).size.height;
     return Column(
       children: [
-        // SizedBox(height: he / 40),
-        // Container(
-        //   width: wd,
-        //   child: Text(
-        //     "Welcome",
-        //     style: TextStyle(
-        //       fontSize: 35.0.sp,
-        //       fontFamily: "Cocan",
-        //       color: Colors.white,
-        //     ),
-        //     textAlign: TextAlign.left,
-        //   ),
-        // ),
-        // Container(
-        //   width: wd,
-        //   child: Text(
-        //     "Sign up to get started",
-        //     style: TextStyle(
-        //       fontSize: 25.0.sp,
-        //       fontFamily: "Cocan",
-        //       color: MyColors.secondaryText,
-        //     ),
-        //   ),
-        // ),
         SizedBox(height: he / 40),
         Center(
           child: SizedBox(
@@ -59,8 +35,9 @@ class _P1State extends State<P1> {
                     Radius.circular(15),
                   ),
                 ),
-                hintText: "User Name",
-                hintStyle: TextStyle(fontSize: 15.0.sp, height: 0.5),
+                hintText: "اسم المستخدم",
+                hintStyle: TextStyle(
+                    fontSize: 15.0.sp, height: 0.5, fontFamily: "Kofi"),
                 prefixIcon: Icon(
                   EvaIcons.personOutline,
                   size: wd / 12,
@@ -84,11 +61,12 @@ class _P1State extends State<P1> {
                     Radius.circular(15),
                   ),
                 ),
-                hintText: "Birth Date",
-                hintStyle: TextStyle(fontSize: wd / 20, height: 0.5),
+                hintText: "تاريخ الميلاد",
+                hintStyle: TextStyle(
+                    fontSize: wd / 20, height: 0.5, fontFamily: "Kofi"),
                 prefixIcon: Icon(
                   Icons.event,
-                  size: 30,
+                  size: 25.0.sp,
                 ),
               ),
               dateMask: 'd MMM, yyyy',
@@ -105,7 +83,6 @@ class _P1State extends State<P1> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Row(
-              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 GFRadio(
                   size: GFSize.SMALL,
@@ -122,17 +99,16 @@ class _P1State extends State<P1> {
                 ),
                 SizedBox(width: 10),
                 Text(
-                  "Male",
+                  "ذكر",
                   style: TextStyle(
-                    fontSize: wd / 15,
-                    fontFamily: "Cocan",
+                    fontSize: 16.0.sp,
+                    fontFamily: "Kofi",
                     color: Colors.black,
                   ),
                 )
               ],
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 GFRadio(
                   size: GFSize.SMALL,
@@ -149,10 +125,10 @@ class _P1State extends State<P1> {
                 ),
                 SizedBox(width: 10),
                 Text(
-                  "Female",
+                  "أنثى",
                   style: TextStyle(
-                    fontSize: wd / 15,
-                    fontFamily: "Cocan",
+                    fontSize: 16.0.sp,
+                    fontFamily: "Kofi",
                     color: Colors.black,
                   ),
                 )

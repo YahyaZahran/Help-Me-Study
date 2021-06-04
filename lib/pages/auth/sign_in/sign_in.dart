@@ -1,9 +1,11 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:logger/logger.dart';
 
 import 'package:testap/pages/auth/sign_up/sign_up.dart';
 
 import 'package:sizer/sizer.dart';
+import 'package:testap/services/api.dart';
 
 import '../../home.dart';
 
@@ -15,15 +17,7 @@ class SignInPage extends StatelessWidget {
 
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
-          color: Color(0xffF0F2F5),
-          // gradient: LinearGradient(
-          //   colors: [
-          //     Theme.of(context).primaryColor,
-          //     Theme.of(context).accentColor
-          //   ],
-          // ),
-        ),
+        decoration: BoxDecoration(color: Color(0xffF0F2F5)),
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           child: ListView(
@@ -39,22 +33,6 @@ class SignInPage extends StatelessWidget {
                   ),
                 ),
               ),
-              // Text(
-              //   "Welcome",
-              //   style: TextStyle(
-              //     fontSize: 35.0.sp,
-              //     fontFamily: "Cocan",
-              //     color: Colors.white,
-              //   ),
-              // ),
-              // Text(
-              //   "Sign in to continue",
-              //   style: TextStyle(
-              //     fontSize: 25.0.sp,
-              //     fontFamily: "Cocan",
-              //     color: MyColors.secondaryText,
-              //   ),
-              // ),
               SizedBox(height: he / 40),
               Center(
                 child: SizedBox(
@@ -71,8 +49,9 @@ class SignInPage extends StatelessWidget {
                           Radius.circular(15),
                         ),
                       ),
-                      hintText: "Email",
-                      hintStyle: TextStyle(fontSize: 15.0.sp, height: 0.5),
+                      hintText: "البريد الإلكتروني",
+                      hintStyle: TextStyle(
+                          fontSize: 15.0.sp, height: 0.5, fontFamily: "Kofi"),
                       prefixIcon: Icon(
                         EvaIcons.emailOutline,
                         size: 25.0.sp,
@@ -97,8 +76,9 @@ class SignInPage extends StatelessWidget {
                           Radius.circular(15),
                         ),
                       ),
-                      hintText: "Password",
-                      hintStyle: TextStyle(fontSize: 15.0.sp, height: 0.5),
+                      hintText: "كلمة السر",
+                      hintStyle: TextStyle(
+                          fontSize: 15.0.sp, height: 0.5, fontFamily: "Kofi"),
                       prefixIcon: Icon(
                         EvaIcons.eyeOff,
                         size: 30,
@@ -108,27 +88,28 @@ class SignInPage extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 15),
-              Container(
-                width: MediaQuery.of(context).size.width,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    InkWell(
-                        onTap: () {
-                          // TODO: Forget password Function
-                        },
-                        child: Text(
-                          "Forget password?",
-                          style: TextStyle(
-                            fontSize: wd / 23,
-                            fontFamily: "Roboto",
-                            color: Colors.black54,
-                          ),
-                        )),
-                  ],
+              Center(
+                child: Container(
+                  width: 85.0.w,
+                  child: Row(
+                    children: [
+                      InkWell(
+                          onTap: () {
+                            // TODO: Forget password Function
+                          },
+                          child: Text(
+                            "هل نسيت كلمة السر؟",
+                            style: TextStyle(
+                              fontSize: wd / 23,
+                              fontFamily: "Roboto",
+                              color: Colors.black54,
+                            ),
+                          )),
+                    ],
+                  ),
                 ),
               ),
-              SizedBox(height: 5.0.h),
+              SizedBox(height: 3.0.h),
               Center(
                 child: Container(
                   width: 85.0.w,
@@ -147,16 +128,16 @@ class SignInPage extends StatelessWidget {
                             ));
                       },
                       child: Text(
-                        "LogIn",
+                        "دخول",
                         style: TextStyle(
-                          fontSize: 20.0.sp,
-                          fontFamily: "Cocan",
+                          fontSize: 16.0.sp,
+                          fontFamily: "Kofi",
                           color: Colors.white,
                         ),
                       )),
                 ),
               ),
-              SizedBox(height: 15),
+              SizedBox(height: 10),
               Center(
                 child: Container(
                   width: 85.0.w,
@@ -168,19 +149,28 @@ class SignInPage extends StatelessWidget {
                     ),
                   ),
                   child: TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => SignUpPage(),
-                            ));
+                      onPressed: () async {
+                        // Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //       builder: (context) => SignUpPage(),
+                        //     ));
+                        Api api = Api();
+                        var res = await api.register(
+                            userName: 'dart',
+                            birthday: DateTime.now(),
+                            gender: false,
+                            email: 'dart@dart.dart',
+                            phoneNumber: '09999999999',
+                            password: '123',
+                            passwordConfirmation: '123');
                       },
                       child: Text(
-                        "Sign Up",
+                        "التسجيل",
                         style: TextStyle(
-                          fontSize: 20.0.sp,
-                          fontFamily: "Cocan",
-                          color: Colors.black,
+                          fontSize: 16.0.sp,
+                          fontFamily: "Kofi",
+                          color: Theme.of(context).primaryColor,
                         ),
                       )),
                 ),

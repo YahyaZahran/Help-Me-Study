@@ -15,7 +15,7 @@ class SignUpPage extends StatefulWidget {
 class _SignUpPageState extends State<SignUpPage> {
   int groupValue = 0;
 
-  String next = "Next";
+  String next = "التالي";
   int pageNum = 0;
 
   PageController c = PageController();
@@ -60,7 +60,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         print(value);
 
                         setState(() {
-                          value == 2 ? next = "Finish" : next = "Next";
+                          value == 2 ? next = "إرسال" : next = "التالي";
                           pageNum = value;
                         });
                       },
@@ -76,8 +76,8 @@ class _SignUpPageState extends State<SignUpPage> {
                     controller: c,
                     count: 3,
                     effect: JumpingDotEffect(
-                      dotColor: Theme.of(context).primaryColor,
-                      activeDotColor: Theme.of(context).accentColor,
+                      activeDotColor: Theme.of(context).primaryColor,
+                      dotColor: Theme.of(context).accentColor,
                     ),
                   ),
                 ],
@@ -100,6 +100,7 @@ class _SignUpPageState extends State<SignUpPage> {
                               duration: Duration(milliseconds: 200),
                               curve: Curves.easeOut);
                         } else {
+                          Navigator.pop(context);
                           Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
@@ -110,9 +111,9 @@ class _SignUpPageState extends State<SignUpPage> {
                       child: Text(
                         next,
                         style: TextStyle(
-                          fontSize: 20.0.sp,
-                          fontFamily: "Cocan",
-                          color: Colors.black,
+                          fontSize: 16.0.sp,
+                          fontFamily: "kofi",
+                          color: Theme.of(context).primaryColor,
                         ),
                       )),
                 ),

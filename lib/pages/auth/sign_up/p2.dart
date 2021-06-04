@@ -16,30 +16,6 @@ class _P2State extends State<P2> {
     double he = MediaQuery.of(context).size.height;
     return Column(
       children: [
-        // SizedBox(height: he / 40),
-        // Container(
-        //   width: wd,
-        //   child: Text(
-        //     "Welcome",
-        //     style: TextStyle(
-        //       fontSize: 35.0.sp,
-        //       fontFamily: "Cocan",
-        //       color: Colors.white,
-        //     ),
-        //     textAlign: TextAlign.left,
-        //   ),
-        // ),
-        // Container(
-        //   width: wd,
-        //   child: Text(
-        //     "Complete Registeration",
-        //     style: TextStyle(
-        //         fontSize: 25.0.sp,
-        //         fontFamily: "Cocan",
-        //         color: MyColors.secondaryText),
-        //     textAlign: TextAlign.left,
-        //   ),
-        // ),
         SizedBox(height: he / 40),
         Center(
           child: SizedBox(
@@ -56,8 +32,9 @@ class _P2State extends State<P2> {
                     Radius.circular(15),
                   ),
                 ),
-                hintText: "Email",
-                hintStyle: TextStyle(fontSize: wd / 20, height: 0.5),
+                hintText: "البريد الإلكتروني",
+                hintStyle: TextStyle(
+                    fontSize: 16.0.sp, height: 0.5, fontFamily: "Kofi"),
                 prefixIcon: Icon(
                   EvaIcons.emailOutline,
                   size: wd / 12,
@@ -82,8 +59,9 @@ class _P2State extends State<P2> {
                     Radius.circular(15),
                   ),
                 ),
-                hintText: "Phone Number",
-                hintStyle: TextStyle(fontSize: wd / 20, height: 0.5),
+                hintText: "رقم الهاتف",
+                hintStyle: TextStyle(
+                    fontSize: 16.0.sp, height: 0.5, fontFamily: "Kofi"),
                 prefixIcon: Icon(
                   EvaIcons.phoneOutline,
                   size: wd / 12,
