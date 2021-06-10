@@ -1,11 +1,13 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
-import 'package:logger/logger.dart';
+import 'package:get/get.dart';
 
-import 'package:testap/pages/auth/sign_up/sign_up.dart';
+import 'package:testap/deprecated_pages/pages/sign_up/sign_up.dart';
 
 import 'package:sizer/sizer.dart';
+import 'package:testap/pages/auth/sign_up/sign_up_page.dart';
 import 'package:testap/services/api.dart';
+import 'package:testap/utils/dialogs.dart';
 
 import '../../home.dart';
 
@@ -121,11 +123,7 @@ class SignInPage extends StatelessWidget {
                   ),
                   child: TextButton(
                       onPressed: () {
-                        Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => Home(),
-                            ));
+                        Get.to(() => Home());
                       },
                       child: Text(
                         "دخول",
@@ -143,66 +141,28 @@ class SignInPage extends StatelessWidget {
                   width: 85.0.w,
                   decoration: BoxDecoration(
                     border: Border.all(
-                        width: 2, color: Theme.of(context).primaryColor),
+                      width: 2,
+                      color: Theme.of(context).primaryColor,
+                    ),
                     borderRadius: BorderRadius.all(
                       Radius.circular(10),
                     ),
                   ),
                   child: TextButton(
-                      onPressed: () async {
-                        // Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //       builder: (context) => SignUpPage(),
-                        //     ));
-                        Api api = Api();
-                        var res = await api.register(
-                            userName: 'dart',
-                            birthday: DateTime.now(),
-                            gender: false,
-                            email: 'dart@dart.dart',
-                            phoneNumber: '09999999999',
-                            password: '123',
-                            passwordConfirmation: '123');
-                      },
-                      child: Text(
-                        "التسجيل",
-                        style: TextStyle(
-                          fontSize: 16.0.sp,
-                          fontFamily: "Kofi",
-                          color: Theme.of(context).primaryColor,
-                        ),
-                      )),
+                    onPressed: () async {
+                      Get.to(() => SignUpPage());
+                    },
+                    child: Text(
+                      "التسجيل",
+                      style: TextStyle(
+                        fontSize: 16.0.sp,
+                        fontFamily: "Kofi",
+                        color: Theme.of(context).primaryColor,
+                      ),
+                    ),
+                  ),
                 ),
               ),
-              // Row(
-              //   mainAxisAlignment: MainAxisAlignment.center,
-              //   children: [
-              //     Text(
-              //       "I'm a new user .",
-              //       style: TextStyle(
-              //         fontSize: 15.0.sp,
-              //         fontFamily: "Cocan",
-              //         color: Colors.black38,
-              //       ),
-              //     ),
-              //     InkWell(
-              //       onTap: () => Navigator.push(
-              //           context,
-              //           MaterialPageRoute(
-              //             builder: (context) => SignUpPage(),
-              //           )),
-              //       child: Text(
-              //         "Sign up",
-              //         style: TextStyle(
-              //             fontSize: 18.0.sp,
-              //             fontFamily: "Cocan",
-              //             color: Colors.black,
-              //             fontWeight: FontWeight.bold),
-              //       ),
-              //     ),
-              //   ],
-              // )
             ],
           ),
         ),

@@ -16,13 +16,10 @@ dependencies:
   getwidget: ^1.2.4
   smooth_star_rating: ^1.1.1
   sizer: ^1.1.8
-  
   eva_icons_flutter: ^2.0.1
   date_time_picker: ^2.0.0
   page_indicator: ^0.3.0
   image_picker_widget: ^1.0.2
-  # persistent_bottom_nav_bar: ^4.0.2
-  # motion_tab_bar: ^0.1.5
   ff_navigation_bar: ^0.1.5
     
   smooth_page_indicator: ^0.2.3
@@ -30,10 +27,7 @@ dependencies:
   modal_bottom_sheet: ^2.0.0
   toggle_bar: ^1.0.0
   expandable: ^5.0.1
-  # retrofit: ^2.0.0
-  logger: ^1.0.0
   dio: ^4.0.0
-  google_nav_bar: ^5.0.5
   get: ^3.26.0
   
 
