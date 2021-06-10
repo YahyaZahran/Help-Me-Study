@@ -6,6 +6,7 @@ import 'package:ff_navigation_bar/ff_navigation_bar_item.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:testap/controllers/navigation_controller.dart';
+import 'package:testap/utils/dialogs.dart';
 
 class NavigateablePageChild {
   @required
@@ -40,56 +41,17 @@ class NavigateablePage extends StatelessWidget {
               if (!controller.inHome) {
                 controller.setPage(0);
               } else {
-
-                Get.dialog(
-                  AlertDialog(
-                    title: Text(
-                      'انت على وشك الخروج',
-                      style: TextStyle(
-                        color: Theme.of(context).primaryColor,
-                        fontFamily: 'kofi',
-                        fontSize: 15.0.sp,
-                      ),
-                    ),
-                    content: Text(
-                      'اذا كنت متأكد من الخروج من التطبيق اضغط موافق',
-                      style: TextStyle(
-                        fontFamily: 'cairo',
-                        fontSize: 12.0.sp,
-                      ),
-                    ),
-                    actions: [
-                      TextButton(
-                        onPressed: () => Get.back(),
-                        child: Text(
-                          'الغاء',
-                          style: TextStyle(
-                            color: Theme.of(context).accentColor,
-                            fontFamily: 'kofi',
-                        fontSize: 12.0.sp,
-                          ),
-                        ),
-                      ),
-                      TextButton(
-                        onPressed: () => exit(0),
-                        child: Text(
-                          'موافق',
-                          style: TextStyle(
-                            color: Theme.of(context).accentColor,
-                            fontFamily: 'kofi',
-                        fontSize: 12.0.sp,
-                          ),
-                        ),
-                      ),
-                     
-                    ],
-                  ),
+                Dialogs.pushAreUSureDialog(
+                  'انت على وشك الخروج',
+                  'اذا كنت متأكد من الخروج من التطبيق اضغط موافق',
+                  () => exit(0),
                 );
               }
               return false;
             },
             child: Scaffold(
               appBar: AppBar(
+                automaticallyImplyLeading: false,
                 backgroundColor: Colors.white,
                 elevation: 2,
                 actions: actions,

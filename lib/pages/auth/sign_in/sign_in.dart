@@ -123,7 +123,7 @@ class SignInPage extends StatelessWidget {
                   ),
                   child: TextButton(
                       onPressed: () {
-                        Get.to(() => Home());
+                        Get.offAll(() => Home());
                       },
                       child: Text(
                         "دخول",
