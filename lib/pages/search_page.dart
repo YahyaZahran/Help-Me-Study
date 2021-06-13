@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:testap/models/course.dart';
 
 import 'courses_page/course_widget.dart';
 import 'posts_page/post_widget.dart';
@@ -83,12 +84,7 @@ class SearchPage extends StatelessWidget {
               ),
               ListView.builder(
                 itemBuilder: (_, __) => CourseWidget(
-                        title: 'تعلم جدول الضرب بسرعة البرق',
-                        description: 'طريقة رائعة جدا و سحرية في تعليم جدول الضرب و هي ما بترحم ابدا',
-                        locatoin: 'حمص-عكرمة الجديدة -معهد الامل',
-                        authorName: 'يحيى الزهران',
-                        authorImageUrl: '',
-                        coverUrl: '',
+                     course: Course(),
                       ),
                 itemCount: 4,
               ),

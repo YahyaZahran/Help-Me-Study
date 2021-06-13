@@ -1,95 +1,56 @@
-import 'dart:convert';
-
-import 'package:flutter/material.dart';
-
-import 'user.dart';
-
-@immutable
 class Post {
-  final int id;
-  final User author;
-  final String description;
-  final DateTime postedAt;
-  final int likes;
-  final int commentsNumber;
+  int id;
+  String title;
+  double postedAt;
+  String description;
+  int author;
+  String authorName;
+  int likes;
+  int commentsNo;
+  List<String> tags;
+
   Post({
-    @required this.id,
-    @required this.author,
-    @required this.description,
-    @required this.postedAt,
-    @required this.likes,
-    @required this.commentsNumber,
+    this.id,
+    this.title,
+    this.postedAt,
+    this.description,
+    this.author,
+    this.authorName,
+    this.likes,
+    this.commentsNo,
+    this.tags,
   });
 
-  Post copyWith({
-    int id,
-    User author,
-    String description,
-    DateTime postedAt,
-    int likes,
-    int commentsNumber,
-  }) {
-    return Post(
-      id: id ?? this.id,
-      author: author ?? this.author,
-      description: description ?? this.description,
-      postedAt: postedAt ?? this.postedAt,
-      likes: likes ?? this.likes,
-      commentsNumber: commentsNumber ?? this.commentsNumber,
-    );
+  Post.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    title = json['title'];
+    postedAt = json['posted_at'];
+    description = json['description'];
+    author = json['author'];
+    authorName = json['author_name'];
+    likes = json['likes'];
+    commentsNo = json['comments_no'];
+    if (json['tags'] != null) {
+      tags = <String>[];
+      json['tags'].forEach((v) {
+        tags.add(v);
+      });
+    }
   }
 
-  Map<String, dynamic> toMap() {
-    return {
-      'id': id,
-      'author': author.toMap(),
-      'description': description,
-      'postedAt': postedAt.millisecondsSinceEpoch,
-      'likes': likes,
-      'commentsNumber': commentsNumber,
-    };
-  }
-
-  factory Post.fromMap(Map<String, dynamic> map) {
-    return Post(
-      id: map['id'],
-      author: User.fromMap(map['author']),
-      description: map['description'],
-      postedAt: DateTime.fromMillisecondsSinceEpoch(map['postedAt']),
-      likes: map['likes'],
-      commentsNumber: map['commentsNumber'],
-    );
-  }
-
-  String toJson() => json.encode(toMap());
-
-  factory Post.fromJson(String source) => Post.fromMap(json.decode(source));
-
-  @override
-  String toString() {
-    return 'Post(id: $id, author: $author, description: $description, postedAt: $postedAt, likes: $likes, commentsNumber: $commentsNumber)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-
-    return other is Post &&
-        other.id == id &&
-        other.author == author &&
-        other.description == description &&
-        other.postedAt == postedAt &&
-        other.likes == likes &&
-        other.commentsNumber == commentsNumber;
-  }
-
-  @override
-  int get hashCode {
-    return id.hashCode ^
-        author.hashCode ^
-        description.hashCode ^
-        postedAt.hashCode ^
-        likes.hashCode ^
-        commentsNumber.hashCode;
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['title'] = this.title;
+    data['posted_at'] = this.postedAt;
+    data['description'] = this.description;
+    data['author'] = this.author;
+    data['author_name'] = this.authorName;
+    data['likes'] = this.likes;
+    data['comments_no'] = this.commentsNo;
+    if (this.tags != null) {
+      data['tags'] = this.tags;
+    }
+    return data;
   }
 }

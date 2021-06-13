@@ -12,9 +12,8 @@ import 'package:testap/utils/form_handler/radio_group_handler.dart';
 import 'package:testap/utils/form_handler/text_field_handler.dart';
 import 'package:testap/utils/validators.dart';
 
-class SignUpPageController extends GetX {
+class SignUpPageController extends GetxController {
   final api = Get.find<Api>();
-  final AuthController authController = Get.find<AuthController>();
 
   static const String USERNAME = 'name';
   static const String EMAIL = 'email';
@@ -78,7 +77,7 @@ class SignUpPageController extends GetX {
 
     try {
       Dialogs.pushLoadingDialog(() {});
-      await authController.register(
+      await api.register(
         name: form.getValue(USERNAME),
         email: form.getValue(EMAIL),
         gender: form.getValue<bool>(GENDER),

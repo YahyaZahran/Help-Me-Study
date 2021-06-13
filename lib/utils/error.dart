@@ -20,7 +20,12 @@ class ApiInvalidField
   final String fieldName;
   final List<String> errorMessages;
 
-  ApiInvalidField(this.fieldName, this.errorMessages);
+  ApiInvalidField(this.fieldName, this.errorMessages); 
+}
 
-  
+class ApiError
+{
+  final String msg;
+
+  ApiError(this.msg);
 }

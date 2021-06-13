@@ -1,66 +1,37 @@
-import 'dart:convert';
-
-import 'package:flutter/foundation.dart';
-
-import 'user.dart';
-
 class Comment {
-  final User author;
-  final String body;
-  final DateTime commentedAt;
+  int id;
+  int author;
+  int postId;
+  String text;
+  String authorName;
+  double postedAt;
+
   Comment({
-    @required this.author,
-    @required this.body,
-    @required this.commentedAt,
+    this.id,
+    this.author,
+    this.postId,
+    this.text,
+    this.authorName,
+    this.postedAt,
   });
 
-  Comment copyWith({
-    User author,
-    String body,
-    DateTime commentedAt,
-  }) {
-    return Comment(
-      author: author ?? this.author,
-      body: body ?? this.body,
-      commentedAt: commentedAt ?? this.commentedAt,
-    );
+  Comment.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    author = json['author'];
+    postId = json['post_id'];
+    text = json['text'];
+    authorName = json['author_name'];
+    postedAt = json['posted_at'];
   }
 
-  Map<String, dynamic> toMap() {
-    return {
-      'author': author.toMap(),
-      'body': body,
-      'commentedAt': commentedAt.millisecondsSinceEpoch,
-    };
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['author'] = this.author;
+    data['post_id'] = this.postId;
+    data['text'] = this.text;
+    data['author_name'] = this.authorName;
+    data['posted_at'] = this.postedAt;
+    return data;
   }
-
-  factory Comment.fromMap(Map<String, dynamic> map) {
-    return Comment(
-      author: User.fromMap(map['author']),
-      body: map['body'],
-      commentedAt: DateTime.fromMillisecondsSinceEpoch(map['commentedAt']),
-    );
-  }
-
-  String toJson() => json.encode(toMap());
-
-  factory Comment.fromJson(String source) =>
-      Comment.fromMap(json.decode(source));
-
-  @override
-  String toString() =>
-      'Comment(author: $author, body: $body, commentedAt: $commentedAt)';
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-
-    return other is Comment &&
-        other.author == author &&
-        other.body == body &&
-        other.commentedAt == commentedAt;
-  }
-
-  @override
-  int get hashCode => author.hashCode ^ body.hashCode ^ commentedAt.hashCode;
 }

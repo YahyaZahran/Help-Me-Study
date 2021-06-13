@@ -74,7 +74,10 @@ class Dialogs {
             ),
           ),
           TextButton(
-            onPressed: onSure,
+            onPressed: () {
+              Get.back();
+              onSure();
+            },
             child: Text(
               'موافق',
               style: TextStyle(

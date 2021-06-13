@@ -28,7 +28,7 @@ class Review {
 
   Map<String, dynamic> toMap() {
     return {
-      'author': author.toMap(),
+      'author': author.toJson(),
       'description': description,
       'rate': rate,
     };
@@ -36,7 +36,7 @@ class Review {
 
   factory Review.fromMap(Map<String, dynamic> map) {
     return Review(
-      author: User.fromMap(map['author']),
+      author: User.fromJson(map['author']),
       description: map['description'],
       rate: map['rate'],
     );

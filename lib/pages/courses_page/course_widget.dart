@@ -1,24 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:sizer/sizer.dart';
+import 'package:testap/models/course.dart';
 import 'package:testap/pages/course_page/course_page.dart';
 
 class CourseWidget extends StatelessWidget {
-  final String coverUrl;
-  final String title;
-  final String description;
-  final String authorImageUrl;
-  final String authorName;
-  final String locatoin;
+  final Course course;
 
-  const CourseWidget({
-    Key key,
-    @required this.coverUrl,
-    @required this.title,
-    @required this.description,
-    @required this.authorImageUrl,
-    @required this.authorName,
-    @required this.locatoin,
-  }) : super(key: key);
+  const CourseWidget({Key key, this.course}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -35,6 +25,7 @@ class CourseWidget extends StatelessWidget {
                 child: Container(
                   width: 300,
                   height: 200,
+                  margin: EdgeInsets.only(bottom: 10),
                   decoration: BoxDecoration(
                     image: DecorationImage(
                       //FIXME Use NetworkImage with [coverUrl]
@@ -47,14 +38,19 @@ class CourseWidget extends StatelessWidget {
                 ),
               ),
               Text(
-                title,
-                style: TextStyle(fontFamily: 'kofi', fontSize: 14.0.sp),
+                course.title,
+                style: GoogleFonts.getFont(
+                  'Almarai',
+                  fontSize: 15.0.sp,
+                ),
               ),
-              SizedBox(height: 5),
+              SizedBox(height: 10),
               Text(
-                description,
-                style: TextStyle(
-                  fontFamily: 'tajwal',
+                course.description,
+                maxLines: 3,
+                overflow: TextOverflow.ellipsis,
+                style: GoogleFonts.getFont(
+                  'Tajawal',
                   fontSize: 10.0.sp,
                 ),
               ),
@@ -77,9 +73,9 @@ class CourseWidget extends StatelessWidget {
                   ),
                   SizedBox(width: 10),
                   Text(
-                    locatoin,
-                    style: TextStyle(
-                      fontFamily: 'kofi',
+                    'locatoin',
+                    style: GoogleFonts.getFont(
+                      'Almarai',
                       fontSize: 9.0.sp,
                       color: Theme.of(context).accentColor,
                     ),
@@ -105,9 +101,9 @@ class CourseWidget extends StatelessWidget {
                   ),
                   SizedBox(width: 10),
                   Text(
-                    authorName,
-                    style: TextStyle(
-                      fontFamily: 'kofi',
+                    course.authorName,
+                    style: GoogleFonts.getFont(
+                      'Almarai',
                       fontSize: 9.0.sp,
                       color: Theme.of(context).accentColor,
                     ),
