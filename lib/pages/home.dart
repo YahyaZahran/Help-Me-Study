@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:testap/controllers/courses_controller.dart';
 import 'package:testap/controllers/posts_controller.dart';
+import 'package:testap/pages/add_post.dart';
 import 'package:testap/pages/courses_page/courses_page.dart';
 import 'package:testap/pages/posts_page/posts_page.dart';
 import 'package:testap/pages/tutors_page/tutor_widget.dart';
@@ -23,7 +24,7 @@ class Home extends StatelessWidget {
             Icons.search,
             color: Theme.of(context).primaryColor,
           ),
-          onPressed: () => Get.to(()=>SearchPage()),
+          onPressed: () => Get.to(() => SearchPage()),
         ),
         IconButton(
           icon: Icon(
@@ -37,7 +38,11 @@ class Home extends StatelessWidget {
         NavigateablePageChild(
           title: 'الرئيسية',
           icon: Icons.home,
-          body: PostsPage()
+          body: PostsPage(),
+          floatingActionButton: FloatingActionButton(
+            child: Icon(Icons.post_add),
+            onPressed: () => Get.to(() => AddPostPage()),
+          ),
         ),
         NavigateablePageChild(
           title: 'المعلمون',

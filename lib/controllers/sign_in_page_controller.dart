@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:testap/controllers/auth_controller.dart';
@@ -38,6 +39,7 @@ class SignInPageController extends GetxController {
         password: form.getValue('password'),
       );
       Get.find<AuthController>().token = token;
+      Get.find<Api>().setAuthToken(token);
       var user = await api.getAuthenticatedUser();
       Get.find<AuthController>().authenticatedUser = user;
       Get.back(); // remove loading
@@ -49,6 +51,8 @@ class SignInPageController extends GetxController {
       Get.back(); // remove the loader
       Dialogs.pushErrorDialog(
           'يبدو انك غير متصل بالانترنت .. تأكد من الاتصال وحاول مجددا');
+    } on DioError catch (e) {
+      print(e.response.data);
     }
   }
 }

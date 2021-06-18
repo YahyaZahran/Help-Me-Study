@@ -6,7 +6,6 @@ abstract class FetchableListController<T> extends GetxController {
   final _items = <T>[].obs;
   final _loading = false.obs;
 
-
   @override
   void onInit() {
     fetch();

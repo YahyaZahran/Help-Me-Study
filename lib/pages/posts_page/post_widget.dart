@@ -3,11 +3,15 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:sizer/sizer.dart';
+import 'package:testap/controllers/auth_controller.dart';
 import 'package:testap/controllers/comments_controller.dart';
+import 'package:testap/controllers/edit_post_page_controller.dart';
+import 'package:testap/controllers/posts_controller.dart';
 import 'package:testap/models/post.dart';
+import 'package:testap/pages/edit_post.dart';
 import 'package:testap/pages/posts_page/comments/comments_page.dart';
 import 'package:testap/utils/api_time_formatter.dart';
-import 'package:timeago/timeago.dart' as TimeAgo;
+import 'package:testap/utils/dialogs.dart';
 
 import '../../color_pallete.dart';
 
@@ -29,6 +33,7 @@ class PostWidget extends StatelessWidget {
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -80,17 +85,49 @@ class PostWidget extends StatelessWidget {
                     ],
                   ),
                 ),
-                IconButton(
-                  icon: Icon(Icons.more_horiz),
-                  onPressed: () {},
-                )
+                if (Get.find<AuthController>().authenticatedUser.pk ==
+                    post.author)
+                  PopupMenuButton(
+                    padding: EdgeInsets.all(0),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Icon(Icons.more_horiz),
+                    ),
+                    onSelected: (idx) async {
+                      if (idx == 2) {
+                        Dialogs.pushAreUSureDialog(
+                          'هل انت متأكد ؟',
+                          'لن يمكنك التراجع عن هذا الاجراء',
+                          () => Get.find<PostsController>().deletePost(post),
+                        );
+                      }
+                      if (idx == 1) {
+                        Get.to(() => EditPostPage(oldPost: post));
+                      }
+                    },
+                    itemBuilder: (_) => <PopupMenuItem<int>>[
+                      PopupMenuItem(
+                        child: Text(
+                          'تعديل',
+                          style: GoogleFonts.getFont('Tajawal'),
+                        ),
+                        value: 1,
+                      ),
+                      PopupMenuItem(
+                        child: Text(
+                          'حذف',
+                          style: GoogleFonts.getFont('Tajawal'),
+                        ),
+                        value: 2,
+                      ),
+                    ],
+                  )
               ],
             ),
             // SizedBox(height: 15),
             Divider(),
             Text(
-              // 'مرحبا .. بدي حدا يعلمني شلون اخلص من هالمواد الخرى باسرع وقت ... وشقد ما بدو بعطيه',
-              post.description,
+              post.body,
               style: TextStyle(
                 fontFamily: 'tajwal',
               ),
@@ -120,7 +157,7 @@ class PostWidget extends StatelessWidget {
                       SizedBox(width: 10),
                       Text(
                         // '15',
-                        post.likes.toString(),
+                        post.likesCount.toString(),
                         style: TextStyle(
                           fontFamily: 'tajwal',
                           color: Color(0xffFF6868),
@@ -170,7 +207,7 @@ class PostWidget extends StatelessWidget {
                         SizedBox(width: 10),
                         Text(
                           // '15',
-                          post.commentsNo.toString(),
+                          post.commentsCount.toString(),
                           style: TextStyle(
                             fontFamily: 'tajwal',
                             color: Theme.of(context).primaryColor,

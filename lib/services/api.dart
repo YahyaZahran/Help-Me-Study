@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
@@ -26,10 +24,19 @@ class ApiConstants {
       postsEndPoint + '$postId/comments/';
   static String commentEndPoint(int postId, int commentId) =>
       postCommentsEndPoint(postId) + '$commentId/';
+  static String postEndPoint(int postId) => postsEndPoint + '$postId/';
 }
 
 class Api extends GetxService {
   final Dio dio = Dio();
+
+  void setAuthToken(String token) {
+    dio.options = BaseOptions(
+      headers: {
+        'Authorization': 'Token $token',
+      },
+    );
+  }
 
   Future<String> register({
     @required String name,
@@ -101,10 +108,7 @@ class Api extends GetxService {
   }
 
   Future<List<Comment>> getAllComments(int postId) async {
-    var response = await dio.get(ApiConstants.postCommentsEndPoint(postId),
-        options: Options(headers: {
-          'Authorization': 'Token ' + Get.find<AuthController>().token
-        }));
+    var response = await dio.get(ApiConstants.postCommentsEndPoint(postId));
     var comments = List.from(response.data);
     return comments.map((comment) => Comment.fromJson(comment)).toList();
   }
@@ -114,49 +118,76 @@ class Api extends GetxService {
     @required int postId,
     @required String text,
   }) async {
-    var response = await dio.post(ApiConstants.postCommentsEndPoint(postId),
-        options: Options(
-          headers: {
-            'Authorization': 'Token ' + Get.find<AuthController>().token
-          },
-        ),
-        data: {'author': userId, 'post_id': postId, 'text': text});
+    var response = await dio.post(
+      ApiConstants.postCommentsEndPoint(postId),
+      data: {'author': userId, 'post_id': postId, 'text': text},
+    );
     print(Get.find<AuthController>().token);
     return Comment.fromJson(response.data);
   }
 
   Future<User> getAuthenticatedUser() async {
-    var res = await dio.get(
-      ApiConstants.userEndPoint,
-      options: Options(
-        headers: {'Authorization': 'Token ' + Get.find<AuthController>().token},
-      ),
-    );
+    var res = await dio.get(ApiConstants.userEndPoint);
     return User.fromJson(res.data);
   }
 
   Future<void> deleteComment(int postId, int commentId) async {
-    await dio.delete(
-      ApiConstants.commentEndPoint(postId, commentId),
-      options: Options(
-        headers: {'Authorization': 'Token ' + Get.find<AuthController>().token},
-      ),
-    );
+    await dio.delete(ApiConstants.commentEndPoint(postId, commentId));
   }
 
   Future<Comment> updateComment(
-      int postId, int commentId, String newText) async {
-    var res = await dio.patch(ApiConstants.commentEndPoint(postId, commentId),
-        options: Options(
-          headers: {
-            'Authorization': 'Token ' + Get.find<AuthController>().token
-          },
-        ),
-        data: {
-          'author': Get.find<AuthController>().authenticatedUser.pk,
-          'post_id': postId,
-          'text': newText,
-        });
+    int postId,
+    int commentId,
+    String newText,
+  ) async {
+    var res = await dio.patch(
+      ApiConstants.commentEndPoint(postId, commentId),
+      data: {
+        'author': Get.find<AuthController>().authenticatedUser.pk,
+        'post_id': postId,
+        'text': newText,
+      },
+    );
     return Comment.fromJson(res.data);
+  }
+
+  Future<Post> addPost({
+    @required String body,
+    List<String> tags,
+  }) async {
+    var response = await dio.post(
+      ApiConstants.postsEndPoint,
+      data: {
+        'body': body,
+        'tags': tags,
+      },
+    );
+    // FIXME delete this after when API handles the response corrctly
+    response.data['author_name'] =
+        Get.find<AuthController>().authenticatedUser.name;
+    response.data['author'] = Get.find<AuthController>().authenticatedUser.pk;
+    return Post.fromJson(response.data);
+  }
+
+  Future<void> deletePost(int id) async {
+    await dio.delete(ApiConstants.postEndPoint(id));
+  }
+
+  Future<Post> editPost(
+    int postId,
+    String body,
+    List<String> tags,
+  ) async {
+    var response = await dio.patch(
+      ApiConstants.postEndPoint(postId),
+      data: {
+        'body': body,
+        'tags': tags,
+      },
+    );
+    response.data['author_name'] =
+        Get.find<AuthController>().authenticatedUser.name;
+    response.data['author'] = Get.find<AuthController>().authenticatedUser.pk;
+    return Post.fromJson(response.data);
   }
 }
